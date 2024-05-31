@@ -37,9 +37,9 @@ void Sprite_Back::debug_imgui()
 			ImGui::SliderFloat("alpha", &color.w, 0.0f, 1.0f);
 			ImGui::EndMenu();
 		}
-		ImGui::SliderFloat3("position", &position.x, -720*0.5, 720*0.5);
-		ImGui::SliderFloat3("scale", &scale.x, 0.001f, 1280.0f);
-		ImGui::SliderFloat3("rotate", &rotate.x, -180.0f, 180.0f);
+		ImGui::SliderFloat2("position", &position.x, -720*0.5, 720*0.5);
+		ImGui::SliderFloat2("scale", &scale.x, 0.001f, 1280.0f);
+		ImGui::SliderFloat("rotate", &rotate.x, -180.0f, 180.0f);
 		ImGui::TreePop();
 	}
 }

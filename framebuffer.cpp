@@ -5,6 +5,7 @@ framebuffer::framebuffer(ID3D11Device* device, uint32_t width, uint32_t height)
 { 
     HRESULT hr{ S_OK }; 
 
+
     Microsoft::WRL::ComPtr<ID3D11Texture2D> render_target_buffer; 
     D3D11_TEXTURE2D_DESC texture2d_desc{}; 
     texture2d_desc.Width = width; 
@@ -68,6 +69,12 @@ void framebuffer::clear(ID3D11DeviceContext* immediate_context, float r, float g
 
 void framebuffer::activate(ID3D11DeviceContext* immediate_context) 
 { 
+    // ピクセルシェーダーからリソースをアンバインドする
+    ID3D11ShaderResourceView* nullSRV[1] = { NULL };
+    immediate_context->PSSetShaderResources(1, 1, nullSRV);
+    // ピクセルシェーダーからリソースをアンバインドする
+    immediate_context->PSSetShaderResources(0, 1, nullSRV);
+
     viewport_count = D3D11_VIEWPORT_AND_SCISSORRECT_OBJECT_COUNT_PER_PIPELINE; 
     immediate_context->RSGetViewports(&viewport_count, cached_viewports); 
     immediate_context->OMGetRenderTargets(1, cached_render_target_view.ReleaseAndGetAddressOf(),cached_depth_stencil_view.ReleaseAndGetAddressOf()); 

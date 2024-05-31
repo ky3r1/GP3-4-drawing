@@ -465,7 +465,6 @@ void framework::render(float elapsed_time/*Elapsed seconds from last frame*/)
 		sprite_back.get_rotate());
 #endif // SPRITE_BACK
 
-
 	// To chage the units from centimeters to meters, set 'scale_factor' to 0.01.
 	int clip_index{ 0 };
 	int frame_index{ 0 };
@@ -485,6 +484,7 @@ void framework::render(float elapsed_time/*Elapsed seconds from last frame*/)
 	animation::keyframe& keyframe{ animation.sequence.at(frame_index) };
 	immediate_context->OMSetDepthStencilState(depth_stencil_states[0].Get(), 1);
 	immediate_context->RSSetState(rasterizer_state[0].Get());
+
 #ifdef NICO
 	skinned_meshes[0]->render(
 		immediate_context.Get(),
@@ -557,6 +557,7 @@ void framework::render_2D(int index, DirectX::XMFLOAT3 position, DirectX::XMFLOA
 	immediate_context->OMSetDepthStencilState(depth_stencil_states[3].Get(), 1);
 	//rasterizer
 	immediate_context->RSSetState(rasterizer_state[3].Get());
+
 	sprite_batches[index]->begin(immediate_context.Get(), index);
 	sprite_batches[index]->render(immediate_context.Get(),
 		position,
